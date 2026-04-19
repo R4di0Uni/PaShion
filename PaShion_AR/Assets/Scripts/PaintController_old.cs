@@ -30,3 +30,4 @@ public class PaintController_old : MonoBehaviour
         }
     }
 }
+
