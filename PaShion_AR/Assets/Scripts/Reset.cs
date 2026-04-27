@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Reset : MonoBehaviour
 {
@@ -8,13 +9,13 @@ public class Reset : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Keyboard.current.tKey.wasPressedThisFrame)
         {
             trigger.SendTrigger();
             Debug.Log("AI Trigger sent (T)");
         }
 
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Keyboard.current.cKey.wasPressedThisFrame)
         {
             ClearAll();
         }
