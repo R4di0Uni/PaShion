@@ -177,7 +177,7 @@ PlayerSettings:
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
   AndroidBundleVersionCode: 1
-  AndroidMinSdkVersion: 30
+  AndroidMinSdkVersion: 25
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
   AndroidPreferredDataLocation: 1
@@ -832,7 +832,23 @@ PlayerSettings:
   webWasm2023: 0
   webEnableSubmoduleStrippingCompatibility: 0
   scriptingDefineSymbols:
+    Android: EXTOSC
+    EmbeddedLinux: EXTOSC
+    GameCoreScarlett: EXTOSC
+    GameCoreXboxOne: EXTOSC
+    Kepler: EXTOSC
+    LinuxHeadlessSimulation: EXTOSC
+    Nintendo Switch: EXTOSC
+    Nintendo Switch 2: EXTOSC
+    PS4: EXTOSC
+    PS5: EXTOSC
+    QNX: EXTOSC
+    Standalone: EXTOSC
+    VisionOS: EXTOSC
+    WebGL: EXTOSC
+    XboxOne: EXTOSC
     iPhone: UNITY_XR_ARKIT_LOADER_ENABLED
+    tvOS: EXTOSC
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
@@ -929,7 +945,7 @@ PlayerSettings:
   qnxGraphicConfPath: 
   apiCompatibilityLevel: 6
   captureStartupLogs: {}
-  activeInputHandler: 1
+  activeInputHandler: 0
   windowsGamepadBackendHint: 0
   cloudProjectId: 1e057feb-54cb-4e1a-aa96-5b1ae2bfe879
   framebufferDepthMemorylessMode: 0

@@ -9,7 +9,6 @@ public class CopyTextureToRT : MonoBehaviour
 
     void Start()
     {
-
         runtimeMaterial = mannequinRenderer.material;
     }
 
@@ -24,5 +23,17 @@ public class CopyTextureToRT : MonoBehaviour
                 Graphics.Blit(sourceTexture, outputRT);
             }
         }
+    }
+
+    // Reset (clears what TouchDesigner sees)
+    public void ResetRenderTexture()
+    {
+        if (outputRT == null) return;
+
+        RenderTexture.active = outputRT;
+        GL.Clear(true, true, Color.white);
+        RenderTexture.active = null;
+
+        Debug.Log("RT Reset");
     }
 }

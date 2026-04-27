@@ -729,6 +729,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 468728825}
   m_CullTransparentMesh: 1
+--- !u!1 &473512094
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 473512096}
+  - component: {fileID: 473512095}
+  m_Layer: 0
+  m_Name: Reset
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &473512095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473512094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5fe92873eab9e34c8e1c6bc8e5ab94b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Reset
+  trigger: {fileID: 1158954151}
+  renderTexture: {fileID: 8400000, guid: 6bfcadf827f6fa04984edad34bd3b1db, type: 2}
+  textureCopier: {fileID: 484453844}
+--- !u!4 &473512096
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473512094}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.56328, y: -0.63966, z: 3.01602}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &484453843
 GameObject:
   m_ObjectHideFlags: 0
@@ -1666,6 +1713,76 @@ MonoBehaviour:
   uiCircleAim: {fileID: 1683956700}
   arCamera: {fileID: 1090296415}
   paintable: {fileID: 0}
+--- !u!1 &1158954150
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1158954153}
+  - component: {fileID: 1158954152}
+  - component: {fileID: 1158954151}
+  m_Layer: 0
+  m_Name: OSCManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1158954151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158954150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8417cffb13c60d43bfd349e73ae33f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OSCTrigger
+  transmitter: {fileID: 1158954152}
+--- !u!114 &1158954152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158954150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464088183d2a1484ab8fb64e356c9f5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: extOSC::extOSC.OSCTransmitter
+  _autoConnect: 1
+  _closeOnPause: 0
+  _mapBundle: {fileID: 0}
+  _workInEditor: 0
+  _localHostMode: 0
+  _localPortMode: 2
+  _localReceiver: {fileID: 0}
+  _localHost: 192.168.1.209
+  _localPort: 7000
+  _remoteHost: 127.0.0.1
+  _remotePort: 6000
+  _useBundle: 0
+--- !u!4 &1158954153
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158954150}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.56328, y: -0.63966, z: 3.01602}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1159525732
 GameObject:
   m_ObjectHideFlags: 0
@@ -2506,3 +2623,5 @@ SceneRoots:
   - {fileID: 484453845}
   - {fileID: 1076240417}
   - {fileID: 269428970}
+  - {fileID: 1158954153}
+  - {fileID: 473512096}

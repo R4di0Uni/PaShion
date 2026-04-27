@@ -48,6 +48,12 @@ public class PaintableObject : NetworkBehaviour
         PaintClientRpc(uv, r, g, b, a, brushSize);
     }
 
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+    void ClearServerRpc(byte r, byte g, byte b, byte a)
+    {
+        ClearClientRpc(r, g, b, a);
+    }
+
     [ClientRpc]
     void PaintClientRpc(Vector2 uv, byte r, byte g, byte b, byte a, float brushSize)
     {
@@ -57,6 +63,14 @@ public class PaintableObject : NetworkBehaviour
         int y = (int)(uv.y * paintTexture.height);
         DrawCircle(x, y, (int)brushSize, color);
     }
+    [ClientRpc]
+    void ClearClientRpc(byte r, byte g, byte b, byte a)
+    {
+        Color32 color = new Color32(r, g, b, a);
+        ClearTexture(color);
+    }
+
+
 
     void DrawCircle(int cx, int cy, int radius, Color32 color)
     {
@@ -91,6 +105,31 @@ public class PaintableObject : NetworkBehaviour
             dirtyMaxX = Mathf.Max(dirtyMaxX, xMax);
             dirtyMaxY = Mathf.Max(dirtyMaxY, yMax);
         }
+    }
+
+    public void ClearTexture(Color color)
+    {
+        if (paintTexture == null || pixelBuffer == null) return;
+
+        Color32 c = (Color32)color;
+
+        for (int i = 0; i < pixelBuffer.Length; i++)
+        {
+            pixelBuffer[i] = c;
+        }
+
+        paintTexture.SetPixels32(pixelBuffer);
+        paintTexture.Apply(false);
+
+        isDirty = false;
+
+        Debug.Log("Texture cleared locally");
+    }
+
+    public void Clear(Color color)
+    {
+        Color32 c = (Color32)color;
+        ClearServerRpc(c.r, c.g, c.b, c.a);
     }
 
     public void FlushIfDirty()
