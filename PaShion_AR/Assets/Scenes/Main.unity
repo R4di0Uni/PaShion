@@ -759,8 +759,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Reset
   trigger: {fileID: 1158954151}
-  renderTexture: {fileID: 8400000, guid: 6bfcadf827f6fa04984edad34bd3b1db, type: 2}
   textureCopier: {fileID: 484453844}
+  paintable: {fileID: 1688865785}
 --- !u!4 &473512096
 Transform:
   m_ObjectHideFlags: 0
@@ -807,6 +807,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CopyTextureToRT
   mannequinRenderer: {fileID: 1688865786}
   outputRT: {fileID: 8400000, guid: 6bfcadf827f6fa04984edad34bd3b1db, type: 2}
+  isResetting: 0
 --- !u!4 &484453845
 Transform:
   m_ObjectHideFlags: 0

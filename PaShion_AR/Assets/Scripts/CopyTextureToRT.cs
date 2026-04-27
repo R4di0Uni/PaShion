@@ -7,6 +7,8 @@ public class CopyTextureToRT : MonoBehaviour
 
     private Material runtimeMaterial;
 
+    public bool isResetting = false;
+
     void Start()
     {
         runtimeMaterial = mannequinRenderer.material;
@@ -14,6 +16,8 @@ public class CopyTextureToRT : MonoBehaviour
 
     void Update()
     {
+        if (isResetting) return;
+
         if (runtimeMaterial != null && outputRT != null)
         {
             Texture sourceTexture = runtimeMaterial.mainTexture;
