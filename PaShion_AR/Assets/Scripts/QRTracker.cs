@@ -9,6 +9,9 @@ public class QRTracker : MonoBehaviour
     [SerializeField]
     private GameObject modelPrefab;
 
+    [SerializeField] private Vector3 positionOffset = Vector3.zero;
+    [SerializeField] private Vector3 scaleOffset = Vector3.one;
+
     private GameObject spawnedObject;
 
     private void OnEnable()
@@ -30,11 +33,11 @@ public class QRTracker : MonoBehaviour
             {
                 spawnedObject = Instantiate(
                     modelPrefab,
-                    trackedImage.transform.position,
+                    trackedImage.transform.position + positionOffset,
                     trackedImage.transform.rotation
                 );
-
                 spawnedObject.transform.SetParent(trackedImage.transform);
+                //spawnedObject.transform.localScale = scaleOffset;
             }
         }
 
@@ -43,7 +46,7 @@ public class QRTracker : MonoBehaviour
             if (spawnedObject != null)
             {
                 spawnedObject.transform.position =
-                    trackedImage.transform.position;
+                    trackedImage.transform.position + positionOffset;
 
                 spawnedObject.transform.rotation =
                     trackedImage.transform.rotation;
