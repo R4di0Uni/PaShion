@@ -42,30 +42,44 @@ public class PCHostManager : MonoBehaviour
             );
             Debug.Log("Transport configured.");
 
-            // Step 3 — Start NGO host
+            // Step 3 — Start NGO host and wait for it to be ready
             if (!NetworkManager.Singleton.IsHost && !NetworkManager.Singleton.IsServer)
             {
                 NetworkManager.Singleton.StartHost();
-                Debug.Log("Host started and listening.");
-            }
-            else
-            {
-                Debug.LogWarning("NetworkManager already running.");
+
+                // Wait until host is actually listening
+                float timeout = 5f;
+                float elapsed = 0f;
+                while (!NetworkManager.Singleton.IsHost && elapsed < timeout)
+                {
+                    await Task.Delay(100);
+                    elapsed += 0.1f;
+                }
+
+                if (!NetworkManager.Singleton.IsHost)
+                {
+                    Debug.LogError("Host failed to start within timeout.");
+                    return;
+                }
+
+                Debug.Log("Host confirmed listening.");
             }
 
-            // Step 4 — Create session with relay code stored at creation time
+            // Step 4 — NOW create session with relay code
+            // Host is definitely running at this point
             var sessionOptions = new SessionOptions
             {
                 MaxPlayers = maxPlayers,
                 IsPrivate = false,
                 SessionProperties = new Dictionary<string, SessionProperty>
-                {
-                    { "relayCode", new SessionProperty(relayCode, VisibilityPropertyOptions.Public) }
-                }
+            {
+                { "relayCode", new SessionProperty(relayCode, VisibilityPropertyOptions.Public) }
+            }
             };
 
             hostSession = (await MultiplayerService.Instance.CreateSessionAsync(sessionOptions)).AsHost();
             Debug.Log("Session created: " + hostSession.Id);
+            Debug.Log("Relay code stored in session: " + relayCode);
 
             if (joinCodeText != null)
                 joinCodeText.text = "Code: " + relayCode;
@@ -73,6 +87,7 @@ public class PCHostManager : MonoBehaviour
         catch (System.Exception e)
         {
             Debug.LogError("StartHost failed: " + e.Message);
+            Debug.LogError("Stack trace: " + e.StackTrace);
         }
     }
 

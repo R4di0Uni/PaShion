@@ -4,7 +4,7 @@ public class GameSetup : MonoBehaviour
 {
     public PCHostManager pcHostManager;
     public AndroidClientManager androidClientManager;
-    public QRTracker QRtracker;
+    public QRTracker qrTracker;
 
     void Start()
     {
@@ -12,14 +12,14 @@ public class GameSetup : MonoBehaviour
             androidClientManager.enabled = true;
             pcHostManager.enabled = false;
 
-            QRtracker.enabled = true;
+            qrTracker.enabled = true;
 
     #else
             pcHostManager.enabled = true;
             androidClientManager.enabled = false;
 
-            QRtracker.enabled = false;
-            QRtracker.sceneObject.SetActive(true);
+            qrTracker.enabled = false;
+            qrTracker.sceneObject.SetActive(true);
     #endif
     }
 }

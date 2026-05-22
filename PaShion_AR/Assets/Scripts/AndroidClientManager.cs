@@ -24,38 +24,50 @@ public class AndroidClientManager : MonoBehaviour
         {
             try
             {
-                var results = await MultiplayerService.Instance.QuerySessionsAsync(
-                    new QuerySessionsOptions()
-                );
-
+                Debug.Log("Querying sessions...");
+                var results = await MultiplayerService.Instance.QuerySessionsAsync(new QuerySessionsOptions());
                 Debug.Log("Sessions found: " + results.Sessions.Count);
 
                 if (results.Sessions.Count > 0)
                 {
                     string sessionId = results.Sessions[0].Id;
-                    Debug.Log("Joining session: " + sessionId);
+                    Debug.Log("Attempting to join session: " + sessionId);
 
-                    // Step 1 — Join the lobby session
                     session = await MultiplayerService.Instance.JoinSessionByIdAsync(sessionId);
-                    Debug.Log("Session joined.");
+                    Debug.Log("Session joined successfully.");
 
-                    // Step 2 — Read relay code stored by PC host
+                    if (session == null)
+                    {
+                        Debug.LogError("Session is null after join!");
+                        await Task.Delay((int)(retryInterval * 1000));
+                        continue;
+                    }
+
+                    Debug.Log("Checking for relayCode property...");
                     if (!session.Properties.ContainsKey("relayCode"))
                     {
-                        Debug.LogError("Session has no relayCode property!");
+                        Debug.LogError("No relayCode in session properties!");
                         await Task.Delay((int)(retryInterval * 1000));
                         continue;
                     }
 
                     string relayCode = session.Properties["relayCode"].Value;
-                    Debug.Log("Relay code: " + relayCode);
+                    Debug.Log("Relay code retrieved: " + relayCode);
 
-                    // Step 3 — Join Relay allocation using the code
+                    // Validate it's not empty
+                    if (string.IsNullOrEmpty(relayCode))
+                    {
+                        Debug.LogError("Relay code is empty!");
+                        await Task.Delay((int)(retryInterval * 1000));
+                        continue;
+                    }
+
                     var joinAllocation = await RelayService.Instance.JoinAllocationAsync(relayCode);
                     Debug.Log("Relay allocation joined.");
 
-                    // Step 4 — Configure UnityTransport with Relay data
                     var transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
+                    Debug.Log("Transport: " + (transport == null ? "NULL" : "found"));
+
                     transport.SetClientRelayData(
                         joinAllocation.RelayServer.IpV4,
                         (ushort)joinAllocation.RelayServer.Port,
@@ -66,7 +78,6 @@ public class AndroidClientManager : MonoBehaviour
                     );
                     Debug.Log("Transport configured.");
 
-                    // Step 5 — Start NGO client
                     NetworkManager.Singleton.StartClient();
                     Debug.Log("Client started.");
                     return;
@@ -80,6 +91,7 @@ public class AndroidClientManager : MonoBehaviour
             catch (System.Exception e)
             {
                 Debug.LogError("FindAndJoin error: " + e.Message);
+                Debug.LogError("Stack trace: " + e.StackTrace);
                 await Task.Delay((int)(retryInterval * 1000));
             }
         }

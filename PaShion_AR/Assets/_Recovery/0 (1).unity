@@ -423,7 +423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   pcHostManager: {fileID: 852812680}
   androidClientManager: {fileID: 1673411005}
-  qrTracker: {fileID: 528294800}
+  QRtracker: {fileID: 0}
 --- !u!114 &269428972
 MonoBehaviour:
   m_ObjectHideFlags: 0
