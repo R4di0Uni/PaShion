@@ -58,6 +58,7 @@ public class PaintableObject : NetworkBehaviour
     void PaintClientRpc(Vector2 uv, byte r, byte g, byte b, byte a, float brushSize)
     {
         Debug.Log("ClientRpc received. paintTexture null? " + (paintTexture == null));
+        TutorialUI.Instance.TutorialCompleted(3);
         Color32 color = new Color32(r, g, b, a);
         int x = (int)(uv.x * paintTexture.width);
         int y = (int)(uv.y * paintTexture.height);

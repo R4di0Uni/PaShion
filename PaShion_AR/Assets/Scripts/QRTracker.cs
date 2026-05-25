@@ -28,10 +28,11 @@ public class QRTracker : MonoBehaviour
         foreach (var trackedImage in args.added)
         {
             sceneObject.SetActive(true); 
-            ApplyTransform(trackedImage);
+            ApplyTransform(trackedImage); 
+            TutorialUI.Instance.TutorialCompleted(1);
             //sceneObject.transform.position =
             //    trackedImage.transform.TransformPoint(positionOffset); 
-            
+
             //sceneObject.transform.rotation =
             //    Quaternion.Euler(rotationOffset); 
             //sceneObject.transform.SetParent(

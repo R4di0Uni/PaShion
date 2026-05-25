@@ -23,7 +23,8 @@ public class EnableColourWheel : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        colourWheel.SetActive(true);
+        colourWheel.SetActive(true); 
+        TutorialUI.Instance.TutorialCompleted(2);
 
         paintController.isPainting = true;
 
