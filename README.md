@@ -16,19 +16,19 @@ Internet connection for downloading dependencies
 
 
 
-## Clone Repository:
+## 1| Clone Repository:
 git clone -b dev https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
 
 
-## Open the Project Folder
+## 2| Open the Project Folder
 
 cd stable-diffusion-webui
 
-## Download the safeTensor
+## 3| Download the safeTensor
 Place the model(safetTensor file) inside "stable-diffusion-webui/models/Stable-diffusion/".  
 The one used in the development of this project was https://civitai.com/models/87371/difconsistency-checkpoint-sd-15-pack
 
-## Run the web-user.bat
+## 4| Run the web-user.bat
 
-## Open the interface 
+## 5| Open the interface 
 http://127.0.0.1:7860
